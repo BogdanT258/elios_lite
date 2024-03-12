@@ -1,16 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { firedb, app } from "../firebaseConfig";
+import {useSelector, useDispatch} from 'react-redux';
+import Loader from "../Components/Loader";
+import { toast } from "react-toastify";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const loading = useSelector(state=>state.loading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const register = async () => {
+    dispatch({type:'showLoading'});
     try {
       const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(
@@ -19,20 +26,24 @@ function Register() {
         password,
       );
       const user = userCredential.user;
-      console.log(user);
       const userData = {
         email: user.email,
         profilePicUrl: "",
         bio: "",
       };
       setDoc(doc(firedb, "users", user.uid), userData);
-      console.log(user);
+      toast.success('Login succesfull');
+      dispatch({type:'hideLoading'});
+      navigate('/login');
     } catch (error) {
+      toast.error('Login Failed')
       if (error.code === "auth/email-already-in-use") {
+        dispatch({type:'hideLoading'});
         setErrorMessage(
           "Email is already in use. Please use a different email.",
         );
       } else {
+        dispatch({type:'hideLoading'});
         setErrorMessage("An error occurred. Please try again later.");
       }
       console.error(error);
@@ -41,6 +52,7 @@ function Register() {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-primary to-secondary">
+      {loading && <Loader/>}
       <div className="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
         <div className="w-full">
           <div className="text-center">

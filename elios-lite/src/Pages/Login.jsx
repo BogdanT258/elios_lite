@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { firedb, app } from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getDoc } from "firebase/firestore";
-import { doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
+import Loader from "../Components/Loader";
+import { toast } from "react-toastify";
+import {useSelector, useDispatch} from 'react-redux';
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const loading = useSelector(state=>state.loading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const login = async () => {
+    dispatch({type:'showLoading'});
     try {
       const auth = getAuth(app);
       const userCredential = await signInWithEmailAndPassword(
@@ -18,8 +25,6 @@ function Login() {
         password,
       );
       const user = userCredential.user;
-  
-      // Wait for the document snapshot to be retrieved
       const userDataSnapshot = await getDoc(doc(firedb, "users", user.uid));
   
       // Check if the document exists
@@ -27,12 +32,17 @@ function Login() {
         // Access the data from the snapshot
         const userData = userDataSnapshot.data();
         localStorage.setItem("userData", JSON.stringify(userData));
+        toast.success('Login succesfull');
+        dispatch({type:'hideLoading'});
+        navigate('/home');
 
         console.log("User Data:", userData);
       } else {
         console.log("User data not found");
       }
     } catch (error) {
+      toast.error('Login Failed')
+      dispatch({type:'hideLoading'});
       console.log(error);
     }
   };
@@ -40,6 +50,7 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-primary to-secondary">
+      {loading && <Loader/>}
       <div className="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
         <div className="w-full">
           <div className="text-center">
@@ -113,5 +124,6 @@ function Login() {
     </div>
   );
 }
+
 
 export default Login;
