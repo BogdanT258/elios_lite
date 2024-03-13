@@ -12,13 +12,21 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const loading = useSelector(state=>state.loading);
+  const loading = useSelector(state => state.loading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const register = async () => {
-    dispatch({type:'showLoading'});
+    dispatch({ type: 'showLoading' });
     try {
+      if (password !== confirmPassword) {
+        setErrorMessage("Passwords do not match.");
+        dispatch({ type: 'hideLoading' });
+        setPassword("");
+        setConfirmPassword("");
+        return;
+      }
+
       const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -32,18 +40,18 @@ function Register() {
         bio: "",
       };
       setDoc(doc(firedb, "users", user.uid), userData);
-      toast.success('Login succesfull');
-      dispatch({type:'hideLoading'});
+      toast.success('Registering succesfull');
+      dispatch({ type: 'hideLoading' });
       navigate('/login');
     } catch (error) {
-      toast.error('Login Failed')
+      toast.error('Failed Registration');
       if (error.code === "auth/email-already-in-use") {
-        dispatch({type:'hideLoading'});
+        dispatch({ type: 'hideLoading' });
         setErrorMessage(
           "Email is already in use. Please use a different email.",
         );
       } else {
-        dispatch({type:'hideLoading'});
+        dispatch({ type: 'hideLoading' });
         setErrorMessage("An error occurred. Please try again later.");
       }
       console.error(error);
@@ -52,7 +60,7 @@ function Register() {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-primary to-secondary">
-      {loading && <Loader/>}
+      {loading && <Loader />}
       <div className="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
         <div className="w-full">
           <div className="text-center">
@@ -100,7 +108,7 @@ function Register() {
               <div className="relative mt-6">
                 <input
                   type="password"
-                  name="password"
+                  name="confirmPassword"
                   id="confirmPassword"
                   placeholder="Confirm Password"
                   value={confirmPassword}
@@ -108,7 +116,7 @@ function Register() {
                   className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
                 />
                 <label
-                  htmlFor="password"
+                  htmlFor="confirmPassword"
                   className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
                 >
                   Confirm Password
@@ -131,7 +139,7 @@ function Register() {
               <p className="text-center text-sm text-gray-500">
                 Have an account?
                 <Link
-                  to="/register"
+                  to="/login"
                   className="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none pl-2"
                 >
                   Sign in

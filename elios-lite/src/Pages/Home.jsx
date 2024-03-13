@@ -1,10 +1,11 @@
 import React from 'react'
+import DefaultLayout from '../Components/DefaultLayout'
 
 function Home() {
   return (
-    <div className='bg-gradient-to-r from-primary to-secondary h-screen'>
-      <h1 className='text-3xl text-center'>Home</h1>
-    </div>
+    <DefaultLayout>
+      
+    </DefaultLayout>
   )
 }
 

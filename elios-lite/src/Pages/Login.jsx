@@ -34,7 +34,7 @@ function Login() {
         localStorage.setItem("userData", JSON.stringify(userData));
         toast.success('Login succesfull');
         dispatch({type:'hideLoading'});
-        navigate('/home');
+        navigate('/');
 
         console.log("User Data:", userData);
       } else {
