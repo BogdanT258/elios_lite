@@ -26,7 +26,7 @@ function Register() {
         setConfirmPassword("");
         return;
       }
-
+  
       const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -40,7 +40,7 @@ function Register() {
         bio: "",
       };
       setDoc(doc(firedb, "users", user.uid), userData);
-      toast.success('Registering succesfull');
+      toast.success('Registration successful');
       dispatch({ type: 'hideLoading' });
       navigate('/login');
     } catch (error) {
@@ -57,6 +57,7 @@ function Register() {
       console.error(error);
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-primary to-secondary">
