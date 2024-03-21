@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { firedb, app } from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -7,13 +7,18 @@ import Loader from "../Components/Loader";
 import { toast } from "react-toastify";
 import {useSelector, useDispatch} from 'react-redux';
 
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const loading = useSelector(state=>state.loading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('userData')) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const login = async () => {
     dispatch({type:'showLoading'});
