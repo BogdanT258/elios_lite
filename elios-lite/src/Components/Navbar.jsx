@@ -24,13 +24,14 @@ function Navbar() {
     ];
 
     return (
-        <div className='bg-gradient-to-r from-slate-900 to-violet-700'>
+        <div className=''>
             <nav className="py-5">
                 <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
                     <a href="/" className="flex items-center">
                         <span className="self-center font-semibold whitespace-nowrap text-white text-4xl">Elios Lite</span>
                     </a>
                     <div className="flex items-center lg:order-2">
+                        {/* Sign out button in the future below */}
                         <div className="hidden mt-2 mr-4 sm:inline-block">
                             <span></span>
                         </div>
@@ -55,6 +56,7 @@ function Navbar() {
                     </div>
                 </div>
             </nav>
+            <hr />
         </div>
     );
 }

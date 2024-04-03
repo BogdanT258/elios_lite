@@ -3,11 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { firedb, app } from "../firebaseConfig";
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Loader from "../Components/Loader";
 import { toast } from "react-toastify";
 
 function Register() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,7 +33,7 @@ function Register() {
         setConfirmPassword("");
         return;
       }
-  
+
       const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -42,6 +43,7 @@ function Register() {
       const user = userCredential.user;
       const userData = {
         email: user.email,
+        username: username,
         profilePicUrl: "",
         bio: "",
       };
@@ -63,7 +65,7 @@ function Register() {
       console.error(error);
     }
   };
-  
+
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-primary to-secondary">
@@ -78,6 +80,23 @@ function Register() {
           </div>
           <div className="mt-5">
             <form action="">
+              <div className="relative mt-6">
+                <input
+                  type="username"
+                  name="username"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Username"
+                  className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+                />
+                <label
+                  htmlFor="username"
+                  className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >
+                  Username
+                </label>
+              </div>
               <div className="relative mt-6">
                 <input
                   type="email"

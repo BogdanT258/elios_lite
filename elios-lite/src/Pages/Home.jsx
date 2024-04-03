@@ -19,6 +19,7 @@ function Home() {
       });
       setData(temp); 
       dispatch({ type: "hideLoading" });
+      console.log(temp);
     } catch (error) {
       console.error("Error fetching data: ", error);
       dispatch({ type: "hideLoading" });

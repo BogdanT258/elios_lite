@@ -7,16 +7,25 @@ function DefaultLayout(props) {
   const loading = useSelector(state => state.loading);
 
   return (
-    <div className="relative">
+    <div className="">
       <Navbar />
       {loading && (
-        <div className="absolute top-1/2 left-1/2 z-50">
+        <div className="">
           <Loader />
         </div>
       )}
-      <div className='content mt-5 border-2 h-[85vh] rounded-md'>{props.children}</div>
+      <div className='fixed left-0 top-0 -z-10 h-full w-full'>
+        <div class="absolute inset-0 -z-10 h-screen w-screen items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
+      </div>
+      <div class=''>{props.children}</div>
+      
     </div>
   )
 }
 
 export default DefaultLayout;
+
+
+
+
+
