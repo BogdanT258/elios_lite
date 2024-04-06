@@ -52,8 +52,8 @@ const AddPost = () => {
   return (
     <DefaultLayout>
       <div className="flex">
-        <div className="editor mx-auto mt-5 w-1/2 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-          <div className="heading text-center font-bold text-2xl m-5 text-gray-800">
+        <div className="editor mx-auto mt-5 w-1/2 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl h-[550px]">
+          <div className="heading text-center font-bold text-2xl m-5 text-gray-800 text-white">
             New Post
           </div>
           <input
@@ -106,31 +106,35 @@ const AddPost = () => {
           </div>
         </div>
         {image && (
-          <div className="w-1/2">
-            <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 m-5 max-w-2xl">
-              <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-                <h1 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-                  Preview
-                </h1>
-                <h2 className="mb-4 text-1xl lg:text-3xl tracking-tight font-bold text-gray-900 dark:text-white">
-                  {title}
-                </h2>
-                <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
-                  {description}
-                </p>
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt=""
-                  className="mt-5 h-auto w-auto rounded"
-                />
-              </div>
-            </article>
-          </div>
+         <div className="w-1/2 h-[550px]">
+         <article className="p-6  rounded-lg border border-gray-200 shadow-md m-5 max-w-2xl">
+           <div className="mx-auto max-w-screen-sm text-center lg:mb-16 ">
+             <h1 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+               Preview
+             </h1>
+             <h2 className="mb-4 text-1xl lg:text-3xl tracking-tight font-bold text-gray-900 dark:text-white">
+               {title}
+             </h2>
+             <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+               {description}
+             </p>
+             <img
+               src={URL.createObjectURL(image)}
+               alt=""
+               className="mt-5 h-auto w-auto rounded h-36px max-h-[300px]" 
+             />
+           </div>
+         </article>
+       </div>
+       
         )}
-      </div>
+      </div> 
     </DefaultLayout>
   );
 
 };
 
 export default AddPost;
+
+
+
