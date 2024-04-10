@@ -1,54 +1,50 @@
-import React from 'react'
+import React from 'react';
 
 function Post({ post }) {
     return (
         <div>
-            <div class="flex bg-white border border-gray-300 rounded-md shadow-md -z-10 dark:bg-gray-800 dark:border-gray-700 mx-2 md:mx-auto my-10 max-w-md md:max-w-2xl">
-                <div class="flex items-start px-4 py-6">
-                    <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src='' alt="avatar" />
-                    <div class="">
-                        <div class="flex items-center justify-between">
-                            <h2 class="text-lg font-semibold text-gray-900 -mt-1 text-white">{post.user.username} </h2>
-                            {/* <small class="text-sm text-gray-700">22h ago</small> */}
+            <div className='flex items-center justify-center min-h-screen'>
+                <div className="rounded-xl border p-5 shadow-md w-6/12 bg-white">
+                    <div className="flex w-full items-center justify-between border-b pb-3">
+                        <div className="flex items-center space-x-3">
+                            <div className="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
+                            <div className="text-lg font-bold text-slate-700">{post.user.username}</div>
                         </div>
-                        {/* <p class="text-gray-700">Joined 12 SEP 2012. </p> */}
-                        <h3 class="mt-3 text-gray-700 text-sm text-white">
-                            {post.description}
-                        </h3>
-                        <div className='flex justify-center m-5'>
-                        <img src={post.imageURL} alt="image" className='w-1/2'/>
+                        <div className="flex items-center space-x-8">
+                            <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">Category</button>
+                            <div className="text-xs text-neutral-500">2 hours ago</div>
                         </div>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex mr-2 text-gray-700 text-sm mr-3">
-                                <button>
-                                    <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1 text-white" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </div>
+
+                    <div className="mt-4 mb-6">
+                        <div className="mb-3 text-xl font-bold">{post.title}</div>
+                        <div className="text-sm text-neutral-600">{post.description}</div>
+                    </div>
+                    <div className='flex justify-center m-5 w-full'>
+                        <img src={post.imageURL} alt="image" className='w-1/2' />
+                    </div>
+                    <div>
+                        <div className="flex items-center justify-between text-slate-500">
+                            <div className="flex space-x-4 md:space-x-8">
+                                <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="mr-1.5 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                     </svg>
-                                </button>
-                                <span className='text-white'>12</span>
-                            </div>
-                            <div class="flex mr-2 text-gray-700 text-sm mr-8">
-                                <button className=''>
-                                    <svg fill="none" viewBox="0 0 24 24" class="text-white w-4 h-4 mr-1" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                                    <span>125</span>
+                                </div>
+                                <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="mr-1.5 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                     </svg>
-                                </button>
-                                <span className='text-white'>8</span>
-                            </div>
-                            <div class="flex mr-2 text-gray-700 text-sm mr-4">
-                                <button>
-                                    <svg fill="none" viewBox="0 0 24 24" class="text-white w-4 h-4 mr-1" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                    </svg>
-                                </button>
-                                <span className='text-white'>share</span>
+                                    <span>4</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Post
+export default Post;

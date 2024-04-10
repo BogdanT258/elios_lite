@@ -7,6 +7,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { firedb } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
+
 const AddPost = () => {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
@@ -52,7 +53,7 @@ const AddPost = () => {
   return (
     <DefaultLayout>
       <div className="flex">
-        <div className="editor mx-auto mt-5 w-1/2 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl h-[550px]">
+        <div className=" mx-auto mt-5 w-1/2 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-xl ">
           <div className="heading text-center font-bold text-2xl m-5 text-gray-800 text-white">
             New Post
           </div>
@@ -106,7 +107,7 @@ const AddPost = () => {
           </div>
         </div>
         {image && (
-         <div className="w-1/2 h-[550px]">
+         <div className="w-1/2 h-[550px] max-w-xl ">
          <article className="p-6  rounded-lg border border-gray-200 shadow-md m-5 max-w-2xl">
            <div className="mx-auto max-w-screen-sm text-center lg:mb-16 ">
              <h1 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
