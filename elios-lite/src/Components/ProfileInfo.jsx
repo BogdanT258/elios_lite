@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 
 const ProfileInfo = (info) => {
+
+    const [bio, setBio] = useState();
+
+    const saveChanges = () => {
+        
+    }
+
+
+
     return (
         <div>
             <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
@@ -9,15 +18,6 @@ const ProfileInfo = (info) => {
                         <h2 className="pl-3 mb-4 text-2xl font-semibold"></h2>
                         <a href="#" className="flex items-center px-3 py-2.5 font-bold bg-white text-indigo-900 border rounded-full">
                             Pubic Profile
-                        </a>
-                        <a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
-                            Account Settings
-                        </a>
-                        <a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
-                            Notifications
-                        </a>
-                        <a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
-                            PRO Account
                         </a>
                     </div>
                 </aside>
@@ -51,7 +51,11 @@ const ProfileInfo = (info) => {
                                         <textarea id="message" rows="4" className="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Write your bio here..."></textarea>
                                     </div>
                                     <div className="flex justify-end">
-                                        <button type="submit" className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Save</button>
+                                        <button 
+                                        type="submit" 
+                                        className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                                        onChange={(e) => setBio(e.target.value)}
+                                        >Save</button>
                                     </div>
                                 </div>
                             </div>
